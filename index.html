@@ -1,0 +1,105 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <meta name="theme-color" content="#102a29" />
+  <meta name="description" content="MotionGarden — تجربة ثلاثية الأبعاد تنمو مع حركتك، مع أصوات طبيعة مريحة." />
+  <title>MotionGarden — Grow with every move</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@400;500;600;700;800&family=Tajawal:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="./styles.css" />
+</head>
+<body>
+  <div id="app">
+    <div id="viewport" aria-label="حديقة ثلاثية الأبعاد تفاعلية"></div>
+    <div class="grain" aria-hidden="true"></div>
+    <div class="vignette" aria-hidden="true"></div>
+
+    <header class="topbar">
+      <div class="brand" aria-label="MotionGarden">
+        <div class="brand-mark">✳</div>
+        <div><div class="brand-title">MOTION<span>GARDEN</span></div><div class="brand-sub">GROW WITH EVERY MOVE</div></div>
+      </div>
+      <div class="top-actions">
+        <span class="sun-chip"><span class="sun-dot"></span> عالمك الهادئ</span>
+        <button class="icon-button" id="audioBtn" title="إعدادات الصوت" aria-label="إعدادات الصوت">♫</button>
+        <button class="icon-button" id="cameraBtn" title="تفعيل الكاميرا وحركة اليد" aria-label="تفعيل حركة اليد">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="13" height="14" rx="3"/><path d="m16 10 5-3v10l-5-3" /></svg>
+        </button>
+      </div>
+    </header>
+
+    <aside class="mission-panel surface" aria-live="polite">
+      <div class="eyebrow">رحلتك الأولى <span class="tiny-star">✦</span></div>
+      <h2>أيقظي الحديقة</h2>
+      <p class="mission-desc">كل حركة منك تمنح الطبيعة حياة جديدة.</p>
+      <div class="progress-label"><span>تقدّم الرحلة</span><strong id="progressText">0 / 3</strong></div>
+      <div class="progress"><div id="progressFill"></div></div>
+      <div class="mission-list">
+        <div id="taskSun" class="task"><div class="task-icon">☀</div><div class="task-copy"><b>أيقظي الشمس</b><span>افتحي كفك أو اضغطي زر الشمس</span></div><div class="task-check">○</div></div>
+        <div id="taskBloom" class="task"><div class="task-icon">✿</div><div class="task-copy"><b>ازرعي وردة</b><span>اجمعي الإبهام والسبابة</span></div><div class="task-check">○</div></div>
+        <div id="taskWind" class="task"><div class="task-icon">〰</div><div class="task-copy"><b>أرسلي نسيمًا</b><span>لوّحي بكفك يمينًا ويسارًا</span></div><div class="task-check">○</div></div>
+      </div>
+      <div class="score-row"><span>✦ &nbsp; نقاط الطبيعة</span><strong id="score">0</strong></div>
+      <button class="restart" id="restartBtn">↻ &nbsp; ابدئي جولة جديدة</button>
+    </aside>
+
+    <div class="ambient-caption"><div class="caption-line"></div><span>THE SECRET GARDEN</span><h1>Let nature<br><i>follow your lead.</i></h1></div>
+
+    <div class="scene-hint" id="sceneHint">اسحبي المشهد لاكتشاف الحديقة <span>↔</span></div>
+
+    <section class="controls surface" aria-label="التفاعل مع الحديقة">
+      <div class="control-heading"><span class="live-dot"></span> حرّكي الطبيعة <small>جربي أي حركة</small></div>
+      <div class="control-buttons">
+        <button id="sunAction" class="move-button"><span class="move-icon sun">☀</span><span><b>نور الشمس</b><small>إشراقة دافئة</small></span><span class="hotkey">1</span></button>
+        <button id="bloomAction" class="move-button"><span class="move-icon bloom">✿</span><span><b>ازرعي زهرة</b><small>لحظة ازدهار</small></span><span class="hotkey">2</span></button>
+        <button id="windAction" class="move-button"><span class="move-icon wind">⌁</span><span><b>نسيم هادئ</b><small>حركة الأوراق</small></span><span class="hotkey">3</span></button>
+      </div>
+    </section>
+
+    <div id="toast" class="toast" role="status" aria-live="polite"></div>
+
+    <div class="sound-panel surface" id="soundPanel" hidden>
+      <div class="panel-head"><div><span class="eyebrow">SOUND GARDEN</span><h3>أجواء الحديقة <span>♪</span></h3></div><button id="closeSounds" class="close" aria-label="إغلاق">×</button></div>
+      <p>اختاري الأصوات اللي تريحك. تقدرين توقفين أي صوت في أي وقت.</p>
+      <label class="sound-row"><span>🌊 &nbsp; صوت الماء</span><input type="checkbox" data-sound="water" checked><span class="switch"></span></label>
+      <label class="sound-row"><span>🐦 &nbsp; تغريد الطيور</span><input type="checkbox" data-sound="birds" checked><span class="switch"></span></label>
+      <label class="sound-row"><span>🍃 &nbsp; نسيم الهواء</span><input type="checkbox" data-sound="wind" checked><span class="switch"></span></label>
+      <label class="sound-row"><span>♫ &nbsp; موسيقى تأملية خفيفة</span><input type="checkbox" data-sound="music" checked><span class="switch"></span></label>
+      <div class="volume-row"><span>مستوى الصوت</span><span id="volDisplay">45%</span></div>
+      <input type="range" min="0" max="100" value="45" id="masterVolume" aria-label="مستوى الصوت" />
+      <button class="mute-button" id="muteBtn">إيقاف جميع الأصوات</button>
+    </div>
+
+    <div class="camera-panel surface" id="cameraPanel" hidden>
+      <div class="panel-head"><div><span class="eyebrow">LIVE INTERACTION</span><h3>التحكم بحركة اليد</h3></div><button id="closeCamera" class="close" aria-label="إغلاق">×</button></div>
+      <div class="camera-screen"><video id="handVideo" autoplay muted playsinline></video><div class="camera-placeholder" id="cameraPlaceholder">✋ <span>اضغطي لتشغيل الكاميرا</span></div></div>
+      <div class="camera-status" id="handStatus">الكاميرا متوقفة</div>
+      <p class="camera-help">افتحي كفك للشمس، قرّبي الإبهام والسبابة لزراعة زهرة، ولوّحي باليد لتحريك النسيم. يحتاج المتصفح إلى إذن الكاميرا واتصال إنترنت لتحميل التتبع أول مرة.</p>
+      <button class="camera-toggle" id="startCamera">تشغيل الكاميرا</button>
+      <small class="privacy">🔒 تتم معالجة الصورة داخل المتصفح. لا نرفع فيديو الكاميرا إلى خادم المشروع.</small>
+    </div>
+
+    <div id="intro" class="intro-overlay">
+      <div class="intro-card">
+        <span class="intro-tag"><span>✧</span> WELCOME TO YOUR SANCTUARY</span>
+        <h1>Where every move<br><em>makes life bloom.</em></h1>
+        <p>حديقة ثلاثية الأبعاد تنبض بالحياة مع حركاتك. ابدئي بخطوات بسيطة، واسمعي الماء والطيور والنسيم حولك.</p>
+        <div class="intro-pills"><span>✦ أصوات طبيعة مريحة</span><span>✦ حركة باليد أو اللمس</span><span>✦ بدون تسجيل</span></div>
+        <button id="enterBtn" class="enter-button"><span>ادخلي الحديقة</span><span class="arrow">←</span></button>
+        <div class="intro-note">يبدأ الصوت بعد الدخول فقط. تجربة مجانية.</div>
+      </div>
+      <div class="intro-bottom"><span>01 / A GENTLER WAY TO MOVE</span><span>مُصمّم للحركة الخفيفة والاستمتاع — وليس علاجًا طبيًا</span></div>
+    </div>
+    <div id="complete" class="complete-overlay" hidden><div class="complete-card"><div class="complete-symbol">✿</div><div class="eyebrow">YOUR GARDEN IS ALIVE</div><h2>الحديقة أزهرت بفضلك!</h2><p>أنجزتِ الحركات الثلاث. خذي لحظة واستمتعي بأصوات الطبيعة وبالحديقة التي أيقظتِها.</p><div class="complete-stats"><span>✦ <b>150</b> نقطة</span><span>❀ <b>3</b> حركات</span></div><button id="keepExploring">استمري في الاستكشاف</button></div></div>
+
+    <audio id="waterAudio" src="./assets/audio/water.ogg" loop preload="auto"></audio>
+    <audio id="birdsAudio" src="./assets/audio/birds.ogg" loop preload="auto"></audio>
+    <audio id="windAudio" src="./assets/audio/wind.ogg" loop preload="auto"></audio>
+    <audio id="musicAudio" src="./assets/audio/music.ogg" loop preload="auto"></audio>
+  </div>
+  <script type="module" src="./app.js"></script>
+</body>
+</html>
